@@ -1,42 +1,115 @@
 <div class="login-container">
+
+  <div class="overlay"></div>
+
   <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>Workspace Management</mat-card-title>
-      <mat-card-subtitle>Sign in to your account</mat-card-subtitle>
-    </mat-card-header>
+
+    <div class="logo-section">
+
+      <div class="logo-circle">
+        WM
+      </div>
+
+      <h1>
+        Workspace Management
+      </h1>
+
+      <p>
+        Manage your projects efficiently
+      </p>
+
+    </div>
+
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <mat-form-field class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" />
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onLogin()"
+      >
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+        >
+
+          <mat-label>
+            Email
+          </mat-label>
+
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+          />
+
           @if (isFieldInvalid('email')) {
-            <mat-error>Please enter a valid email</mat-error>
+
+            <mat-error>
+              Please enter a valid email
+            </mat-error>
           }
+
         </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" />
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+        >
+
+          <mat-label>
+            Password
+          </mat-label>
+
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+          />
+
           @if (isFieldInvalid('password')) {
-            <mat-error>Password is required</mat-error>
+
+            <mat-error>
+              Password is required
+            </mat-error>
           }
+
         </mat-form-field>
+
         @if (error()) {
-          <div class="error-message">{{ error() }}</div>
+
+          <div class="error-message">
+
+            {{ error() }}
+
+          </div>
         }
+
         <button
           mat-raised-button
           color="primary"
-          class="full-width"
+          class="login-button"
           [disabled]="!loginForm.valid || isLoading()"
         >
+
           @if (isLoading()) {
-            <mat-spinner diameter="20"></mat-spinner>
+
+            <mat-spinner
+              diameter="20"
+            ></mat-spinner>
+
             Signing in...
+
           } @else {
+
             Sign In
           }
+
         </button>
+
       </form>
+
     </mat-card-content>
+
   </mat-card>
+
 </div>
