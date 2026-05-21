@@ -37,7 +37,6 @@ export class AuthService {
    * after workspace selection
    */
   generateToken(request: GenerateTokenRequest): Observable<ApiResponse<GenerateTokenResponse>> {
-    console.log("🚀 ~ AuthService ~ generateToken ~ request:", request)
     return this.http.post<ApiResponse<GenerateTokenResponse>>(`${environment.apiUrl}/auth/token`,request
     ).pipe(
       tap(response => {

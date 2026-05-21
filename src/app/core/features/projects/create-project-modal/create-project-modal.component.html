@@ -1,0 +1,44 @@
+<h2 mat-dialog-title> Create Project</h2>
+
+    <mat-dialog-content>
+      <form [formGroup]="form"class="form">
+        <mat-form-field appearance="outline" class="full-width">
+
+          <mat-label> Project Name </mat-label>
+          <input matInput formControlName="name" />
+
+          @if ( form.controls['name'].invalid &&  form.controls['name'].touched) {
+            <mat-error> Project name is required </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width" >
+          <mat-label> Description </mat-label>
+          <textarea matInput rows="4"  formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline"class="full-width" >
+          <mat-label> Status </mat-label>
+          <mat-select  formControlName="status" >
+            <mat-option value="Pending">Pending</mat-option>
+            <mat-option value="InProgress"> In Progress  </mat-option>
+            <mat-option value="Completed"> Completed </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+
+      <button mat-button (click)="close()" >Cancel </button>
+
+      <button mat-raised-button  color="primary"[disabled]="form.invalid || isLoading()"
+        (click)="submit()" >
+
+        @if (isLoading()) {
+          <mat-spinner diameter="20"/>
+        } @else {
+          Create
+        }
+      </button>
+    </mat-dialog-actions>

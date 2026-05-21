@@ -10,11 +10,11 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.isAuthenticated()) {
+  const user = authService.user();
+  if (user) {
     return true;
   }
 
-  // Store the intended destination for redirect after login
   sessionStorage.setItem('redirectUrl', state.url);
   return router.createUrlTree(['/auth/login']);
 };
@@ -29,8 +29,6 @@ export const workspaceGuard: CanActivateFn = (route, state) => {
   if (!workspaceId) {
     return router.createUrlTree(['/workspace-selector']);
   }
-
-  // TODO: Validate workspace access in future
   return true;
 };
 
@@ -51,7 +49,5 @@ export const roleGuard: CanActivateFn = (route, state) => {
   if (!user) {
     return router.createUrlTree(['/auth/login']);
   }
-
-  // TODO: Implement role validation from user store
   return true;
 };

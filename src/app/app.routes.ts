@@ -35,7 +35,7 @@ export const routes: Routes = [
     path: 'workspace/:workspaceId',
     canActivate: [authGuard, workspaceGuard],
     loadComponent: () =>
-      import('./core/features/layout-main').then((m) => m.MainLayoutComponent),
+      import('./core/features/projects/layout/layout-main.component').then((m) => m.MainLayoutComponent),
     children: [
       {
         path: 'dashboard',
@@ -48,13 +48,8 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import('./core/features/features-projects-list').then((m) => m.ProjectsListComponent),
-          },
-          {
-            path: ':projectId',
-            loadComponent: () =>
-              import('./core/features/features-project-detail').then((m) => m.ProjectDetailComponent),
-          },
+              import('./core/features/projects/project-list/project-list.component').then((m) => m.ProjectsListComponent),
+          }
         ],
       },
       {

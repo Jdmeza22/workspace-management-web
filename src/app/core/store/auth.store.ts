@@ -38,20 +38,14 @@ export class AuthStore {
   readonly isAuthenticated = computed(() => this._state().isAuthenticated);
   readonly isLoading = computed(() => this._state().isLoading);
   readonly error = computed(() => this._state().error);
+  readonly canCreateProjects = computed(() => { const role = this.currentWorkspace()?.role;
+    return role === 'Admin' || role === 'Editor';
+  });
 
   /**
    * Current role in active workspace
    */
   readonly currentRole = computed(() =>this.currentWorkspace()?.role);
-
-  /**
-   * Can create projects
-   */
-  readonly canCreateProjects =
-    computed(() => { const role = this.currentRole();
-      return role === 'Admin'
-        || role === 'Editor';
-    });
 
   /**
    * Admin access

@@ -1,0 +1,43 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="authService.logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item routerLink="dashboard">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </mat-list-item>
+      <mat-list-item routerLink="projects">
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <span matListItemTitle>Projects</span>
+      </mat-list-item>
+      <mat-list-item routerLink="tasks">
+        <mat-icon matListItemIcon>checklist</mat-icon>
+        <span matListItemTitle>Tasks</span>
+      </mat-list-item>
+      <mat-list-item routerLink="boards">
+        <mat-icon matListItemIcon>view_week</mat-icon>
+        <span matListItemTitle>Boards</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLink="settings">
+        <mat-icon matListItemIcon>settings</mat-icon>
+        <span matListItemTitle>Settings</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
