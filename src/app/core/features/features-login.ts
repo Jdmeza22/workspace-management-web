@@ -128,30 +128,26 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    if (!this.loginForm.valid) return;
+  if (!this.loginForm.valid) { return; }
+  this.isLoading.set(true);
+  this.error.set(null);
 
-    this.isLoading.set(true);
-    this.error.set(null);
+  const { email, password } = this.loginForm.value;
 
-    const { email, password } = this.loginForm.value;
-
-    this.authService.login(email, password).subscribe({
+  this.authService.login(email, password).subscribe({
       next: (response) => {
-        this.authStore.setUser(response.data?.user || null);
-        this.authStore.setTokens(response.data?.tokens!);
-        this.authStore.setIsAuthenticated(true);
+        this.authStore.setUser(response.data);
+        this.authStore.setWorkspaces(response.data.workspaces);
         this.isLoading.set(false);
-
-        const redirectUrl = sessionStorage.getItem('redirectUrl') || '/workspace-selector';
-        sessionStorage.removeItem('redirectUrl');
-        this.router.navigateByUrl(redirectUrl);
+        this.router.navigate(['/workspace-selector']);
       },
+
       error: (err) => {
         this.isLoading.set(false);
-        this.error.set(err.message || 'Login failed. Please try again.');
-      },
+        this.error.set(err.error?.message || 'Invalid credentials'  );
+      }
     });
-  }
+}
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.loginForm.get(fieldName);
