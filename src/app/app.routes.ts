@@ -26,12 +26,6 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'workspace-selector',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./core/features/features-workspace-selector').then((m) => m.WorkspaceSelectorComponent),
-  },
-  {
     path: 'workspace/:workspaceId',
     canActivate: [authGuard, workspaceGuard],
     loadComponent: () =>
