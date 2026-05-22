@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { Workspace } from '../../../interfaces/auth.interface';
 import { AuthService } from '../../../services/auth.service';
 import { AuthStore } from '../../../store/auth.store';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workspace-selector-modal',
@@ -20,10 +19,9 @@ export class WorkspaceSelectorModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: { workspaces: Workspace[] },
     private readonly authService: AuthService,
     private readonly authStore: AuthStore,
-    private readonly router: Router
   ) { }
 
-  select(workspace: Workspace) {
+  selectWorkspace(workspace: Workspace) {
     const user = this.authStore.user();
     if (!user) return;
 
@@ -32,7 +30,6 @@ export class WorkspaceSelectorModalComponent {
       next: () => {
         this.authStore.setIsAuthenticated(true);
         this.dialogRef.close(workspace);
-        this.router.navigate(['/workspace', workspace.workspaceId, 'projects']);
       },
       error: () => {
       }

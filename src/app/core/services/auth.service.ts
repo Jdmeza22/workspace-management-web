@@ -1,4 +1,4 @@
-import {Injectable,inject,signal} from '@angular/core';
+import {Injectable,OnInit,inject,signal} from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Router} from '@angular/router';
 import { Observable,tap} from 'rxjs';
@@ -11,16 +11,19 @@ const USER_KEY = 'user';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
-
+export class AuthService implements OnInit {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
+
+  ngOnInit(): void {
+    this._isAuthenticated.set(!!this.getToken());
+  }
 
   /**
    * Global auth state
    */
   private readonly _user = signal<User | null>(this.loadUserFromStorage());
-  private readonly _isAuthenticated = signal<boolean>(this.hasToken());
+  private readonly _isAuthenticated = signal<boolean>(!!this.getToken());
   readonly user = this._user.asReadonly();
   readonly isAuthenticated = this._isAuthenticated.asReadonly();
 

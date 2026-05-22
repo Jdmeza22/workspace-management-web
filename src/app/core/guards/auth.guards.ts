@@ -6,16 +6,16 @@ import { AuthService } from '../services/auth.service';
  * AuthGuard - Protects routes that require authentication
  * Redirects to login if not authenticated
  */
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const user = authService.user();
-  if (user) {
+  const isAuthenticated = authService.isAuthenticated();
+
+  if (isAuthenticated) {
     return true;
   }
 
-  sessionStorage.setItem('redirectUrl', state.url);
   return router.createUrlTree(['/auth/login']);
 };
 

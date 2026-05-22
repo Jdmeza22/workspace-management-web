@@ -7,10 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AuthService } from '../../../services/auth.service';
-import { AuthStore } from '../../../store/auth.store';
+import { AuthService } from '../../../../services/auth.service';
+import { AuthStore } from '../../../../store/auth.store';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { WorkspaceSelectorModalComponent } from '../../projects/workspace-selector-modal/workspace-selector-modal.component';
+import { WorkspaceSelectorModalComponent } from '../../../projects/workspace-selector-modal/workspace-selector-modal.component';
 
 /**
  * Login Component
@@ -73,8 +73,14 @@ export class LoginComponent implements OnInit {
         this.authStore.setWorkspaces(user.workspaces);
         this.isLoading.set(false);
 
-        this.dialog.open(WorkspaceSelectorModalComponent, { data:
-           { workspaces: user.workspaces }, disableClose: true, width: '480px' });
+        this.dialog.open(WorkspaceSelectorModalComponent, {
+          data: { workspaces: user.workspaces },
+          disableClose: true,
+          width: '480px' }).afterClosed().subscribe((selectedWorkspace) => {
+            if (selectedWorkspace) {
+              this.router.navigate(['/workspace', selectedWorkspace.workspaceId, 'projects']);
+            }
+          });
       },
       error: (err) => {
         this.isLoading.set(false);
