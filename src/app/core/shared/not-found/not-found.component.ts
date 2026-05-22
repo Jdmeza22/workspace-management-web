@@ -16,6 +16,6 @@ private readonly route = inject(ActivatedRoute);
 private readonly router = inject(Router);
 
   goToProjects(): void {
-    this.router.navigate(['projects'], { relativeTo: this.route });
+    this.router.navigate(['../projects'], { relativeTo: this.route });
   }
 }
