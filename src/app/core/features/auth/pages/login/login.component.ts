@@ -30,7 +30,6 @@ import { WorkspaceSelectorModalComponent } from '../../../projects/workspace-sel
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    WorkspaceSelectorModalComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
