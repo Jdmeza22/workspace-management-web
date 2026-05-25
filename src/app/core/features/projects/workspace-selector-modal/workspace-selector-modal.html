@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Select workspace</h2>
+<mat-dialog-content>
+  <div *ngFor="let workspace of data.workspaces" class="ws-row">
+    <div class="ws-info">
+      <div class="ws-name">{{ workspace.name }}</div>
+      <div class="ws-role">({{ workspace.role }})</div>
+    </div>
+    <button mat-flat-button color="primary" (click)="selectWorkspace(workspace)">Select</button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+
+</mat-dialog-actions>

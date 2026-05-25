@@ -1,0 +1,34 @@
+<div class="projects-page">
+  <header class="topbar">
+    <div>
+      <h1>Projects</h1>
+      <p> Manage all workspace projects</p>
+    </div>
+
+    @if (canCreateProjects()) {
+      <button mat-raised-button color="primary" (click)="createProject()">
+        + New Project</button>
+    }
+  </header>
+
+  <div class="projects-grid">
+    @for (project of projects(); track project.id) {
+      <div class="project-card">
+        <div class="project-header">
+          <h3>
+            {{ project.name }}
+          </h3>
+
+          <span class="status active">
+            {{ project.status }}
+          </span>
+        </div>
+
+        <p class="description">{{ project.description }}</p>
+        <div class="project-footer">
+          <span>Created by: {{ project.createdByName }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

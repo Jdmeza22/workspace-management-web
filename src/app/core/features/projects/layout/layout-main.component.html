@@ -1,0 +1,45 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">WM </div>
+
+      <div>
+        <h2>
+          Workspace
+        </h2>
+
+        <span>
+          Management
+        </span>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="dashboard" routerLinkActive="active"class="menu-item">
+        Dashboard
+      </a>
+
+      <a routerLink="projects" routerLinkActive="active"class="menu-item">
+        Projects
+      </a>
+
+      <a routerLink="tasks" routerLinkActive="active" class="menu-item">
+        Tasks
+      </a>
+
+      <a routerLink="boards" routerLinkActive="active" class="menu-item">
+        Boards
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-button" (click)="authService.logout()" >
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>
